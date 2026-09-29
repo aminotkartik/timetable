@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Division O Batch 2 (IT) · Timetable Sem I 2026-27</title>
+<style>
+:root{--bg1:#0f172a;--bg2:#312e81;--bg3:#0e7490;--glass:rgba(255,255,255,.10);--line:rgba(255,255,255,.22);--tx:#f8fafc;--mut:#cbd5e1;--acc:#a5b4fc;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg1:#e0e7ff;--bg2:#c7d2fe;--bg3:#a5f3fc;--glass:rgba(255,255,255,.55);--line:rgba(255,255,255,.85);--tx:#0f172a;--mut:#475569;--acc:#4338ca}}
+:root[data-theme="light"]{--bg1:#e0e7ff;--bg2:#c7d2fe;--bg3:#a5f3fc;--glass:rgba(255,255,255,.55);--line:rgba(255,255,255,.85);--tx:#0f172a;--mut:#475569;--acc:#4338ca}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--tx);background:linear-gradient(135deg,var(--bg1),var(--bg2) 55%,var(--bg3));background-attachment:fixed}
+body:before,body:after{content:"";position:fixed;width:420px;height:420px;border-radius:50%;filter:blur(90px);opacity:.55;z-index:0;pointer-events:none}
+body:before{background:#f472b6;top:-120px;left:-100px}body:after{background:#22d3ee;bottom:-140px;right:-100px}
+.wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:20px 16px 40px}
+.glass{background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);border-radius:22px;box-shadow:0 12px 40px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.25)}
+header{padding:20px 24px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+h1{margin:0;font-size:1.4rem;letter-spacing:-.02em}
+.sub{color:var(--mut);font-size:.85rem;margin-top:4px}
+button{font:inherit;color:var(--tx);background:var(--glass);border:1px solid var(--line);border-radius:12px;padding:8px 14px;cursor:pointer;transition:.2s}
+button:hover{transform:translateY(-1px)}
+button.on{background:var(--acc);color:#0f172a;border-color:transparent;font-weight:600}
+main{padding:18px;margin-top:16px}
+.days{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+.title{display:flex;justify-content:space-between;align-items:baseline;margin:14px 2px;flex-wrap:wrap;gap:6px}
+.title b{font-size:1.15rem}.title span{color:var(--mut);font-size:.85rem}
+.slots{display:grid;gap:10px;--h:74px}
+.slot{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:stretch}
+.slot .cell{height:100%}
+.cell.lab{display:flex;flex-direction:column;justify-content:center;border-width:2px;background:linear-gradient(135deg,color-mix(in srgb,var(--c) 42%,transparent),color-mix(in srgb,var(--c) 10%,transparent));box-shadow:0 8px 28px color-mix(in srgb,var(--c) 30%,transparent)}
+.cell.lab .subj{font-size:1.35rem}
+.cell.lab .meta{font-size:.9rem;margin-top:6px}
+.cell.lab:after{content:"2 HOURS";position:absolute;right:14px;top:12px;font-size:.66rem;letter-spacing:.14em;font-weight:700;opacity:.75}
+.time.lab{border-left:3px solid var(--acc);padding-left:10px;display:flex;flex-direction:column;justify-content:space-between}
+.time.lab span{font-size:.7rem;color:var(--acc)}
+.time{font-size:.78rem;color:var(--mut);padding:12px 2px;font-variant-numeric:tabular-nums}
+.time b{display:block;color:var(--tx);font-size:.95rem}
+.cell{padding:12px 14px 12px 18px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.07);position:relative;overflow:hidden;line-height:1.35;min-height:60px}
+.cell:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--c,transparent)}
+.cell.has{background:linear-gradient(90deg,color-mix(in srgb,var(--c) 26%,transparent),rgba(255,255,255,.06))}
+.cell.free{color:var(--mut);font-style:italic;opacity:.55;display:flex;align-items:center}
+.cell.lunch{--c:#fbbf24;display:flex;align-items:center;background:repeating-linear-gradient(45deg,rgba(251,191,36,.14) 0 10px,rgba(251,191,36,.05) 10px 20px)}
+.cell.emp{--c:#34d399;display:flex;align-items:center;font-weight:600}
+.subj{font-weight:700;font-size:1rem}
+.meta{color:var(--mut);font-size:.82rem;margin-top:2px}
+.tag{display:inline-block;font-size:.66rem;padding:1px 7px;border-radius:99px;border:1px solid var(--line);margin-left:8px;vertical-align:middle;color:var(--mut);font-weight:500}
+.b{display:grid;grid-template-columns:70px 1fr auto;gap:8px;align-items:center;padding:6px 0;border-top:1px dashed var(--line)}
+.b:first-of-type{border-top:0;margin-top:6px}
+.b i{font-style:normal;font-size:.7rem;color:var(--mut)}
+.b .r{font-size:.8rem;color:var(--mut);font-variant-numeric:tabular-nums}
+.slot.now .cell{box-shadow:0 0 0 2px var(--acc),0 0 30px rgba(165,180,252,.5)}
+.slot.now .time b:after{content:" • NOW";color:var(--acc);font-size:.66rem}
+.slot.next .cell{box-shadow:0 0 0 2px #f472b6,0 0 26px rgba(244,114,182,.45);animation:pulse 2.2s ease-in-out infinite}
+.slot.next .time b:after{content:" • NEXT";color:#f472b6;font-size:.66rem}
+.slot.next .time.lab span:after{content:" • NEXT"}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 2px #f472b6,0 0 18px rgba(244,114,182,.35)}50%{box-shadow:0 0 0 2px #f472b6,0 0 34px rgba(244,114,182,.6)}}
+.past .cell{opacity:.45}
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.chip{font-size:.72rem;padding:4px 9px;border-radius:99px;border:1px solid var(--line);display:flex;gap:6px;align-items:center}
+.chip i{width:8px;height:8px;border-radius:50%}
+.xfoot{margin-top:16px;display:flex;justify-content:space-between;font-size:.76rem;color:var(--mut);flex-wrap:wrap;gap:6px}
+</style></head><body>
+<div class="wrap">
+<header class="glass"><div><h1>Division O · IT · Batch 2</h1>
+<div class="sub">PCCoE · AS&amp;H Master Time Table · Sem I · 2026-27 · W.E.F. 28/09/2026</div></div>
+<div style="text-align:right"><div id="clock" style="font-size:1.05rem;font-weight:700;font-variant-numeric:tabular-nums"></div><div id="clockd" class="sub" style="margin-top:0"></div></div><button id="thm">◐ Theme</button></header>
+<main class="glass"><div class="days" id="days"></div>
+<div class="title"><b id="ttl"></b><span id="cnt"></span></div>
+<div class="slots" id="slots"></div>
+<div class="legend" id="leg"></div></main>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const DAYS=["Monday","Tuesday","Wednesday","Thursday","Friday"];
+const ST=["9:00","10:00","11:10","12:10","1:10","2:10","3:10","4:10","5:10"];
+const EN=["10:00","11:00","12:10","1:10","2:10","3:10","4:10","5:10","6:10"];
+const MIN=[540,600,670,730,790,850,910,970,1030];
+const COL={LAUC:"#f472b6",COI:"#a78bfa",ENG:"#4ade80",LS:"#38bdf8",EPH:"#a3e635",DM:"#eab308",DEL:"#ef4444",DELD:"#ec4899",WDL:"#14b8a6"};
+// [start slot, span, title, faculty, room]  (as printed in the PDF)
+const D=[
+[[0,2,"WDL-1/ENG-2/WDL-3","SAT/VS/MK","5310L/6507L/5302L"],[2,2,"EPH-1/DEL-2/WDL-3","ARK/RVT/SAT","6418L/5406L/5401L"],[4,1,"Lunch"],[5,1,"EPH","ARK","6509CR"],[6,1,"DM","SAT","6509CR"],[7,1,"DELD #","RVT"]],
+[[0,2,"DEL-1/LS-2/LS-3","RVT/AMP/VS","5406L/6409CR/6501CR"],[2,1,"LAUC","LAS","6501CR"],[3,1,"Lunch"],[4,1,"COI","RT","6501CR"],[5,1,"Empowerment Hour"]],
+[[0,2,"ENG-1/WDL-2/ENG-3","VS/SAT/REG","9001L/5403L/6418L"],[2,1,"COI","RT","6401CR"],[3,1,"Lunch"],[4,2,"LS-1/EPH-2/DEL-3","AAS/ARK/RVT","6406CR/6417L/5406L"],[6,1,"DM","SAT","6515CR"],[7,1,"DM #","SAT"]],
+[[0,1,"DELD","RVT","6501CR"],[1,1,"EPH","ARK","6501CR"],[2,2,"DEL-1/WDL-2/LAUC-3","RVT/SAT/GNT","5406L/5308L/6505L"],[4,1,"Lunch"],[5,1,"LAUC","LAS","6401CR"],[6,1,"DM","SAT","6401CR"],[7,1,"EPH #","ARK"]],
+[[0,2,"WDL-1/LAUC-2/DEL-3","SAT/GNT/RVT","5309L/6504L/5406L"],[2,1,"EPH","ARK","6501CR"],[3,1,"Lunch"],[4,2,"LAUC-1/DEL-2/EPH-3","AMP/RVT/ARK","6504L/5406L/6417L"],[6,1,"DELD","RVT","6304CR"],[7,1,"LAUC #","LAS"]]];
+const col=t=>COL[(t.match(/[A-Z]{2,5}/)||[""])[0]]||"#94a3b8";
+const realDow=new Date().getDay();
+let day=(realDow>=1&&realDow<=5)?realDow-1:0;
+function cell(e){
+ const [s,n,t,f,r]=e;
+ if(/^Lunch$/.test(t))return `<div class="cell lunch">🍽️&nbsp; Lunch break</div>`;
+ if(/Empower/.test(t))return `<div class="cell emp">✨ ${t}</div>`;
+ const hash=t.includes("#"),name=t.replace(" #","");
+ if(name.includes("/")){
+  const c=name.split("/")[1].split("-")[0],f2=(f||"").split("/")[1]||"",r2=(r||"").split("/")[1]||"";
+  return `<div class="cell has lab" style="--c:${col(c)}"><span class="subj">${c} Lab</span><span class="tag" style="margin:6px 0 0;align-self:flex-start">Batch 2</span><div class="meta">${f2?"👤 "+f2:""}${r2?" · 📍 "+r2:""}</div></div>`}
+ return `<div class="cell has" style="--c:${col(name)}"><span class="subj">${name}</span>${hash?'<span class="tag">#</span>':""}<div class="meta">${f?"👤 "+f:""}${r?" · 📍 "+r:""}</div></div>`}
+function findNext(){
+ const n=new Date(),dow=n.getDay(),nm=n.getHours()*60+n.getMinutes();
+ const curDay=(dow>=1&&dow<=5)?dow-1:null;
+ for(let d=0;d<5;d++){
+  const dd=(curDay===null)?d:(curDay+d)%5;
+  const wrapped=curDay!==null&&dd<curDay;
+  for(const e of D[dd]){
+   if(e[2]=="Lunch"||/Empower/.test(e[2]))continue;
+   const startMin=MIN[e[0]];
+   if(dd!==curDay || wrapped || startMin>=nm) return {day:dd,slot:e[0]};
+  }
+ }
+ return null;
+}
+function render(){
+ const now=new Date();
+ $("clock").textContent=now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+ $("clockd").textContent=now.toLocaleDateString([], {weekday:'long',month:'short',day:'numeric'});
+ $("days").innerHTML=DAYS.map((d,i)=>`<button class="${day==i?"on":""}" data-y="${i}">${d}</button>`).join("");
+ $("ttl").textContent=DAYS[day];
+ const ents=D[day],by={};ents.forEach(e=>by[e[0]]=e);
+ const n=now,nm=n.getHours()*60+n.getMinutes(),dow=n.getDay(),today=(dow-1)==day;
+ const nxt=findNext();
+ $("cnt").textContent=ents.filter(e=>e[2]!="Lunch"&&!/Empower/.test(e[2])).length+" sessions";
+ let h="",i=0;
+ while(i<9){const e=by[i],sp=e?e[1]:1;
+  const live=today&&nm>=MIN[i]&&nm<MIN[Math.min(i+sp-1,8)]+60;
+  const isNext=nxt&&nxt.day==day&&nxt.slot==i&&!live;
+  const isPast=today&&nm>=MIN[Math.min(i+sp-1,8)]+60;
+  const lab=sp>1,ht=`min-height:calc(var(--h)*${sp} + 10px*${sp-1})`;
+  const tm=lab?`<div class="time lab"><div><b>${ST[i]}</b></div><span>${sp} hrs</span><div>${EN[i+sp-1]}</div></div>`:`<div class="time"><b>${ST[i]}</b>to ${EN[i]}</div>`;
+  const cls=live?"now":isNext?"next":isPast?"past":"";
+  h+=`<div class="slot ${cls}" style="${ht}">${tm}${e?cell(e):'<div class="cell free">Free</div>'}</div>`;i+=sp}
+ $("slots").innerHTML=h;
+ $("leg").innerHTML=Object.entries(COL).map(([k,c])=>`<span class="chip"><i style="background:${c}"></i>${k}</span>`).join("");}
+document.addEventListener("click",ev=>{const b=ev.target.closest("[data-y]");if(b){day=+b.dataset.y;render()}});
+$("thm").onclick=()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme=="light"?"dark":"light"};
+const _nxt=findNext();if(_nxt)day=_nxt.day;
+render();setInterval(render,60000);
+</script></body></html>
